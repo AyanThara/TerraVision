@@ -6,7 +6,9 @@ inspects its structure (dataset splits, dimensions, and class names), and displa
 10 representative training images (one per class) in a 2x5 grid layout using matplotlib.
 """
 
+# pyrefly: ignore [missing-import]
 from datasets import load_dataset
+# pyrefly: ignore [missing-import]
 import matplotlib.pyplot as plt
 
 
@@ -75,7 +77,7 @@ def main():
         class_name = class_names[label_id]
 
         ax.imshow(img)
-        ax.set_title(class_name, fontsize=10, fontweight="bold")
+        ax.set_title(class_name, fontsize=10, fontweight="semibold")
         ax.axis("off")
 
     plt.tight_layout()

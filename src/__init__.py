@@ -1,0 +1,3 @@
+"""
+TerraVision source package initialization.
+"""

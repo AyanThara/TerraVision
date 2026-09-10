@@ -1,0 +1,193 @@
+{
+    "model_name": "SimpleCNN_V1_Baseline",
+    "best_epoch": 9,
+    "best_val_accuracy": 0.8874,
+    "test_accuracy": 0.8922,
+    "macro_precision": 0.888,
+    "macro_recall": 0.8886,
+    "macro_f1_score": 0.8875,
+    "per_class": {
+        "AnnualCrop": {
+            "precision": 0.8874,
+            "recall": 0.8933,
+            "f1_score": 0.8904,
+            "support": 300
+        },
+        "Forest": {
+            "precision": 0.9518,
+            "recall": 0.9867,
+            "f1_score": 0.9689,
+            "support": 300
+        },
+        "HerbaceousVegetation": {
+            "precision": 0.8413,
+            "recall": 0.8833,
+            "f1_score": 0.8618,
+            "support": 300
+        },
+        "Highway": {
+            "precision": 0.8085,
+            "recall": 0.76,
+            "f1_score": 0.7835,
+            "support": 250
+        },
+        "Industrial": {
+            "precision": 0.9222,
+            "recall": 0.948,
+            "f1_score": 0.9349,
+            "support": 250
+        },
+        "Pasture": {
+            "precision": 0.8243,
+            "recall": 0.915,
+            "f1_score": 0.8673,
+            "support": 200
+        },
+        "PermanentCrop": {
+            "precision": 0.8824,
+            "recall": 0.78,
+            "f1_score": 0.828,
+            "support": 250
+        },
+        "Residential": {
+            "precision": 0.9801,
+            "recall": 0.9867,
+            "f1_score": 0.9834,
+            "support": 300
+        },
+        "River": {
+            "precision": 0.8071,
+            "recall": 0.82,
+            "f1_score": 0.8135,
+            "support": 250
+        },
+        "SeaLake": {
+            "precision": 0.9751,
+            "recall": 0.9133,
+            "f1_score": 0.9432,
+            "support": 300
+        }
+    },
+    "confusion_matrix": [
+        [
+            268,
+            0,
+            5,
+            3,
+            0,
+            7,
+            7,
+            0,
+            4,
+            6
+        ],
+        [
+            0,
+            296,
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            2,
+            0
+        ],
+        [
+            4,
+            4,
+            265,
+            3,
+            1,
+            6,
+            12,
+            3,
+            2,
+            0
+        ],
+        [
+            8,
+            0,
+            8,
+            190,
+            13,
+            4,
+            2,
+            2,
+            23,
+            0
+        ],
+        [
+            0,
+            0,
+            2,
+            9,
+            237,
+            0,
+            1,
+            1,
+            0,
+            0
+        ],
+        [
+            5,
+            1,
+            2,
+            2,
+            0,
+            183,
+            0,
+            0,
+            6,
+            1
+        ],
+        [
+            9,
+            0,
+            26,
+            9,
+            2,
+            3,
+            195,
+            0,
+            6,
+            0
+        ],
+        [
+            0,
+            0,
+            2,
+            0,
+            2,
+            0,
+            0,
+            296,
+            0,
+            0
+        ],
+        [
+            7,
+            2,
+            2,
+            19,
+            2,
+            9,
+            4,
+            0,
+            205,
+            0
+        ],
+        [
+            1,
+            8,
+            3,
+            0,
+            0,
+            8,
+            0,
+            0,
+            6,
+            274
+        ]
+    ]
+}
