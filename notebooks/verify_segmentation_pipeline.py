@@ -48,7 +48,7 @@ def main():
     print("=" * 70)
 
     batch_size = 4
-    patch_size = 512
+    patch_size = 256
     num_classes = len(DEEPGLOBE_CLASSES)
 
     print(f"\n1. Loading DeepGlobe DataLoaders (batch_size={batch_size}, patch_size={patch_size})...")
@@ -83,7 +83,7 @@ def main():
         print(f"  Class {idx} ({class_name:<12}): {count:,} pixels")
 
     print("\n3. Instantiating U-Net Model...")
-    model = UNet(in_channels=3, num_classes=num_classes)
+    model = UNet(in_channels=3, num_classes=num_classes, init_features=32)
     num_params = count_parameters(model)
     print(f"Total U-Net Parameters: {num_params:,}")
 
@@ -110,17 +110,17 @@ def main():
     # Check 1: Image batch shape
     expected_img_shape = torch.Size([batch_size, 3, patch_size, patch_size])
     assert images.shape == expected_img_shape, f"Expected {expected_img_shape}, got {images.shape}"
-    print(f"  [PASS] Image batch shape is (B, 3, 512, 512): {images.shape}")
+    print(f"  [PASS] Image batch shape is (B, 3, 256, 256): {images.shape}")
 
     # Check 2: Mask batch shape
     expected_mask_shape = torch.Size([batch_size, patch_size, patch_size])
     assert masks.shape == expected_mask_shape, f"Expected {expected_mask_shape}, got {masks.shape}"
-    print(f"  [PASS] Mask batch shape is (B, 512, 512): {masks.shape}")
+    print(f"  [PASS] Mask batch shape is (B, 256, 256): {masks.shape}")
 
     # Check 3: Output logits shape
     expected_out_shape = torch.Size([batch_size, num_classes, patch_size, patch_size])
     assert outputs.shape == expected_out_shape, f"Expected {expected_out_shape}, got {outputs.shape}"
-    print(f"  [PASS] Output logits shape is (B, 7, 512, 512): {outputs.shape}")
+    print(f"  [PASS] Output logits shape is (B, 7, 256, 256): {outputs.shape}")
 
     # Check 4: Valid mask range
     valid_range = all(0 <= val <= 6 for val in unique_indices.tolist())

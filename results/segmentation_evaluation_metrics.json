@@ -1,0 +1,44 @@
+{
+    "miou": 0.1719,
+    "mean_dice": 0.2329,
+    "pixel_accuracy": 0.5717,
+    "per_class": {
+        "Unknown": {
+            "iou": 0.5176,
+            "dice": 0.6821,
+            "pixels_present": 190805
+        },
+        "Urban": {
+            "iou": 0.5563,
+            "dice": 0.7149,
+            "pixels_present": 964292
+        },
+        "Agriculture": {
+            "iou": 0.009,
+            "dice": 0.0177,
+            "pixels_present": 60211
+        },
+        "Rangeland": {
+            "iou": 0.1206,
+            "dice": 0.2152,
+            "pixels_present": 449771
+        },
+        "Forest": {
+            "iou": 0.0,
+            "dice": 0.0,
+            "pixels_present": 37602
+        },
+        "Water": {
+            "iou": 0.0,
+            "dice": 0.0,
+            "pixels_present": 260955
+        },
+        "Barren": {
+            "iou": 0.0,
+            "dice": 0.0,
+            "pixels_present": 2444
+        }
+    },
+    "best_epoch": 3,
+    "best_val_miou": 0.1922
+}

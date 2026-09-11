@@ -38,7 +38,7 @@ COLOR_MAP: Dict[int, Tuple[int, int, int]] = {
 }
 
 
-def parse_mask_to_indices(mask_img: Image.Image, patch_size: int = 512) -> np.ndarray:
+def parse_mask_to_indices(mask_img: Image.Image, patch_size: int = 256) -> np.ndarray:
     """
     Parses a PIL mask image into a 2D numpy array of class indices [0..6].
     Supports both single-channel pre-indexed masks (mode 'L') and RGB color-coded masks.
@@ -76,7 +76,7 @@ class DeepGlobeSegmentationDataset(Dataset):
     def __init__(
         self,
         hf_dataset,
-        patch_size: int = 512,
+        patch_size: int = 256,
         is_train: bool = True,
     ):
         self.hf_dataset = hf_dataset
@@ -118,7 +118,7 @@ class DeepGlobeSegmentationDataset(Dataset):
 
 def get_segmentation_dataloaders(
     dataset_name: str = "ratnaonline1/deepglobe-land-cover-classification-dataset",
-    patch_size: int = 512,
+    patch_size: int = 256,
     batch_size: int = 8,
     num_workers: int = 0,
     max_train_samples: Optional[int] = 500,

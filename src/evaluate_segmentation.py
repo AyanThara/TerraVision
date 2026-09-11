@@ -192,12 +192,12 @@ def main():
 
     # 1. Load Test DataLoader
     print("\nLoading DeepGlobe Test DataLoader...")
-    _, _, test_loader = get_segmentation_dataloaders(patch_size=512, batch_size=4, max_train_samples=200)
+    _, _, test_loader = get_segmentation_dataloaders(patch_size=256, batch_size=8, max_train_samples=200)
 
     # 2. Load Checkpoint
     print(f"Loading checkpoint from '{checkpoint_path}'...")
     checkpoint = torch.load(checkpoint_path, map_location=device)
-    model = UNet(in_channels=3, num_classes=len(DEEPGLOBE_CLASSES)).to(device)
+    model = UNet(in_channels=3, num_classes=len(DEEPGLOBE_CLASSES), init_features=32).to(device)
     model.load_state_dict(checkpoint["model_state_dict"])
     best_epoch = checkpoint.get("epoch", "N/A")
     best_val_miou = checkpoint.get("val_miou", 0.0)

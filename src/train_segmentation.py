@@ -136,10 +136,10 @@ def main():
     torch.manual_seed(42)
 
     # Configuration & Hyperparameters
-    patch_size = 512
-    batch_size = 4
-    num_epochs = 5
-    learning_rate = 0.0005
+    patch_size = 256
+    batch_size = 8
+    num_epochs = 3
+    learning_rate = 0.001
 
     # Device selection: MPS (Apple Silicon GPU), CUDA, or CPU
     if torch.backends.mps.is_available():
@@ -169,7 +169,7 @@ def main():
     )
 
     # 2. Instantiate Model, Losses, and Optimizer
-    model = UNet(in_channels=3, num_classes=len(DEEPGLOBE_CLASSES)).to(device)
+    model = UNet(in_channels=3, num_classes=len(DEEPGLOBE_CLASSES), init_features=32).to(device)
     ce_loss_fn = nn.CrossEntropyLoss()
     dice_loss_fn = DiceLoss(num_classes=len(DEEPGLOBE_CLASSES))
     optimizer = optim.Adam(model.parameters(), lr=learning_rate)
