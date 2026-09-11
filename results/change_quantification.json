@@ -1,0 +1,13 @@
+{
+    "total_pixels": 65536,
+    "changed_pixels": 3645,
+    "unchanged_pixels": 61891,
+    "change_percentage": 5.56,
+    "unchanged_percentage": 94.44,
+    "gsd_meters_per_pixel": 10.0,
+    "changed_area_m2": 364500.0,
+    "changed_area_hectares": 36.45,
+    "change_intensity": "Moderate",
+    "spatial_audit_status": "VERIFIED_VALID",
+    "spatial_audit_note": "ericyu/OSCD_Cropped_256 patches are unscaled 256x256 spatial crops preserving native Sentinel-2 10m/pixel GSD (100 m^2/pixel)."
+}
