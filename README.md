@@ -1,4 +1,4 @@
-# TerraVision 🌍
+# TerraVision 
 
 **AI-Powered Satellite Land-Use, Change & Risk Monitoring**
 
