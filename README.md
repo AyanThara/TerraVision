@@ -8,7 +8,7 @@ The project combines deep learning, satellite image analysis, and geospatial ana
 
 ---
 
-## 🚀 Project Pipeline
+##  Project Pipeline
 
 ```text
 Satellite Imagery
