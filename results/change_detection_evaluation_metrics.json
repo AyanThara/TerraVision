@@ -1,0 +1,10 @@
+{
+    "pixel_accuracy": 0.8374,
+    "change_iou": 0.097,
+    "change_dice": 0.1769,
+    "sample_changed_pixel_count": 3645,
+    "sample_total_pixel_count": 65536,
+    "sample_change_percentage": 5.56,
+    "best_epoch": 3,
+    "best_val_iou": 0.0665
+}
