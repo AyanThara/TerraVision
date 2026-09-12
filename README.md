@@ -39,7 +39,7 @@ Interactive Web Platform
 | Phase 3  | Land-Cover Segmentation       | ✅ Complete |
 | Phase 4  | Bi-Temporal Change Detection  | ✅ Complete |
 | Phase 5  | Change Quantification         | ✅ Complete |
-| Phase 6  | Historical Trends             | ⏳ Planned  |
+| Phase 6  | Historical Trends             | ✅ Complete |
 | Phase 7  | Future Prediction             | ⏳ Planned  |
 | Phase 8  | Risk Intelligence             | ⏳ Planned  |
 | Phase 9  | Global Scaling                | ⏳ Planned  |
