@@ -42,7 +42,7 @@ Interactive Web Platform
 | Phase 6  | Historical Trends             | ✅ Complete |
 | Phase 7  | Future Prediction             | ✅ Complete |
 | Phase 8  | Risk Intelligence             | ✅ Complete |
-| Phase 9  | Global Scaling                | ⏳ Planned  |
+| Phase 9  | Global Scaling & Geospatial Integration | ✅ Complete |
 | Phase 10 | Web Platform                  | ⏳ Planned  |
 
 ---
@@ -236,6 +236,72 @@ The engine computes three orthogonal sub-scores and pairs them with an independe
 
 ---
 
+## 🌐 Phase 9 — Global Scaling & Geospatial Integration
+
+Phase 9 transitions TerraVision from the single fixed demonstration site used in Phase 6 (Las Vegas / Henderson) into a production-ready, modular **Geospatial Pipeline** capable of accepting arbitrary geographic coordinates and bounding boxes worldwide.
+
+The pipeline connects dynamically to the **Microsoft Planetary Computer STAC API** to discover and download genuine **Sentinel-2 MSI Level-2A** (surface reflectance) observations, enforces strict preprocessing standards matching the frozen Phase 4 Siam-UNet model, and unifies the full downstream analytical stack (Phase 5 Quantification, Phase 6 Trends, Phase 7 Predictions, and Phase 8 Risk Intelligence) without duplicate logic.
+
+### Core Architectural Specifications
+
+* **Geographic Input:** Supports arbitrary Latitude/Longitude points (with geodesic cosine latitude scaling) and explicit WGS84 bounding boxes `[min_lon, min_lat, max_lon, max_lat]`.
+* **Territorial Envelope:** Enforces Sentinel-2 systematic acquisition limits ($-56^\circ \le \text{lat} \le +84^\circ$), rejecting polar ice sheets and open high seas.
+* **Spatial Footprint Contract:**
+  * **Standardized Patch:** Exactly $256 \times 256$ pixels.
+  * **Nominal Spatial Resolution:** Sentinel-2 native 10 m Ground Sample Distance (GSD).
+  * **Nominal Footprint:** Approximately $2.56\text{ km} \times 2.56\text{ km}$ ($655.36\text{ ha}$).
+  * **Actual Footprint Calculation:** Dynamic calculation of actual ground width, height, and area using a **Haversine-based geographic footprint estimate** (spherical WGS84 mean radius), recorded in metadata alongside effective per-pixel GSD.
+* **Temporal Capability Gate:**
+  * **Mode A (Bi-Temporal, $N=2$ observations, $1$ interval):** Supports bi-temporal change detection, change quantification, and pairwise annualized rate. **Strictly gates out** historical trend regression, Student's t prediction intervals, and risk intelligence because $df = N - 2 = 0$. Intermediate observations are never invented or fabricated.
+  * **Mode B (Multi-Temporal, $N \ge 4$ observations, $\ge 3$ intervals):** Enables defensible OLS trend regression ($df \ge 1$), analytical Student's t intervals, future prediction, and multi-factor risk intelligence.
+* **Live STAC Discovery & Cloud Fallback:**
+  * Searches `sentinel-2-l2a` Level-2A BOA surface reflectance.
+  * Multi-tier progressive cloud filtering: queries strict threshold ($< 5\%$), adaptively relaxing up to $15\%$ with diagnostic metadata warnings if required.
+* **Project Engineering Constraints:**
+  * Default search tolerance: **$\pm 30$ days**.
+  * Minimum temporal baseline: **$\ge 15$ days** between observations.
+  * Explicitly documented as TerraVision project-defined engineering/design constraints, NOT universal scientific thresholds.
+* **Preprocessing Audit & Model Compatibility:**
+  * Strictly preserves Phase 4 audited training transformations: PIL RGB $\to$ `ToTensor()` ($[0, 255] \to [0.0, 1.0]$) $\to$ ImageNet `Normalize` ($\mu = [0.485, 0.456, 0.406]$, $\sigma = [0.229, 0.224, 0.225]$).
+  * Ingests a 6-channel early-fusion tensor $(1, 6, 256, 256)$ into the frozen Phase 4 Siam-UNet checkpoint (`7,763,905` parameters, `requires_grad=False`).
+
+### Global Geographic Benchmark / Integration Test Locations
+
+The pipeline defines five diverse geographic integration test locations representing distinct global biomes:
+
+| Benchmark Key | Location Name | Biome / Setting | Bounding Box (WGS84) |
+| :--- | :--- | :--- | :--- |
+| `las_vegas` | Las Vegas / Henderson, USA | Arid / Desert Urban Expansion (Phase 6 Baseline) | `[-115.120, 36.000, -115.090, 36.030]` |
+| `dubai` | Dubai South Logistics Corridor, UAE | Hyper-Arid / Megacity Infrastructure & Grading | `[55.150, 24.960, 55.175, 24.985]` |
+| `rondonia` | Rondônia Agricultural Frontier, Brazil | Tropical Rainforest / Canopy Clearing | `[-62.900, -10.200, -62.875, -10.175]` |
+| `munich` | Munich North Expansion, Germany | Temperate Europe / Commercial & Farmland Transition | `[11.560, 48.180, 11.585, 48.205]` |
+| `lake_mead` | Lake Mead Shoreline & Marina, USA | Hydrological / Reservoir Shoreline Recession | `[-114.420, 36.010, -114.395, 36.035]` |
+
+*Note: These benchmarks serve as geographic integration test environments; they are NOT claimed as ground-truth validated ML benchmark test sets.*
+
+### Benchmark Demonstration Results (Dubai South Corridor, Mode A: N=2)
+
+* **Temporal Baseline:** 2021-08-06 (Sentinel-2B, cloud: 0.66%) $\to$ 2024-07-26 (Sentinel-2A, cloud: 0.71%)
+* **Temporal Separation:** 1,085 days (2.97 years)
+* **Nominal Footprint:** $256 \times 256$ pixels @ 10 m GSD ($655.36\text{ ha}$)
+* **Actual Geographic Footprint:** **$2,520.0\text{ m} \times 2,779.9\text{ m}$** ($700.52\text{ ha}$, Haversine-based estimate, Effective GSD: $9.84\text{ m} \times 10.86\text{ m}$)
+* **Detected Change:** **$8.42\%$** ($5,518$ changed pixels out of $65,536$)
+* **Nominal Changed Area:** **$55.18\text{ ha}$** (Annualized rate: $18.58\text{ ha/year}$, $2.83\ \%/\text{year}$)
+* **Actual Changed Area:** **$58.98\text{ ha}$** (Annualized rate: $19.86\text{ ha/year}$)
+* **Change Intensity:** **`Moderate`** ($2.0\% \le x < 10.0\%$)
+* **Capability Gate Execution:** Mode A active ($N=2$). Change detection and quantification computed; historical trend regression, prediction intervals, and risk intelligence gated out.
+* **Pipeline Runtime:** ~3.2 seconds end-to-end (including STAC search, parallel crop download, and MPS inference)
+
+### Important Scientific Notes & Disclaimers
+
+* **Decision Threshold & Noise:** The 0.5 probability threshold produced the reported change mask; interpretation remains subject to model limitations and requires independent validation.
+* **Model-Detected Change vs. Real-World Conversion:** Model-detected change indicates optical surface reflectance discrepancies. It does NOT prove ground-truth legal land conversion, zoning entitlement, or verified real-world construction.
+* **No Claim of Global Model Accuracy:** TerraVision does not claim validated global model accuracy. The model was trained on OSCD and evaluated across benchmark integration locations.
+* **Authoritative Pixels vs. Spatial Estimates:** Pixel counts and percentages are the authoritative analytical measurements; physical areas are spatial approximations based on nominal 10 m GSD and Haversine-based geographic footprint estimates.
+* **Radiometric Nuances:** 8-bit true-color visual renderings from live STAC endpoints have visual contrast adjustments that may influence model sensitivity compared to static benchmark datasets.
+
+---
+
 ## 🧩 Project Structure
 
 ```text
@@ -251,7 +317,8 @@ TerraVision/
 │   ├── verify_change_pipeline.py
 │   ├── verify_historical_trends.py
 │   ├── verify_future_prediction.py
-│   └── verify_risk_intelligence.py
+│   ├── verify_risk_intelligence.py
+│   └── verify_geospatial_pipeline.py
 │
 ├── src/
 │   ├── dataset.py
@@ -272,7 +339,11 @@ TerraVision/
 │   ├── quantify_change.py
 │   ├── historical_trends.py
 │   ├── future_prediction.py
-│   └── risk_intelligence.py
+│   ├── risk_intelligence.py
+│   │
+│   ├── geo_utils.py
+│   ├── stac_client.py
+│   └── geospatial_pipeline.py
 │
 ├── models/
 │   └── local model checkpoints
@@ -287,7 +358,9 @@ TerraVision/
 │   ├── future_prediction.json
 │   ├── future_prediction.png
 │   ├── risk_intelligence.json
-│   └── risk_intelligence.png
+│   ├── risk_intelligence.png
+│   ├── global_geospatial_pipeline.json
+│   └── global_geospatial_pipeline.png
 │
 ├── docs/
 │   └── project documentation

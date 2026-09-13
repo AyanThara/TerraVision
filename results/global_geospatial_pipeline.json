@@ -1,0 +1,178 @@
+{
+    "pipeline_metadata": {
+        "phase": "Phase 9 - Global Scaling & Geospatial Integration",
+        "mode": "bi_temporal_analysis",
+        "sensor": "Sentinel-2 MSI Level-2A (BOA Surface Reflectance)",
+        "stac_provider": "Microsoft Planetary Computer",
+        "model_checkpoint": "v3_siam_unet_change_detection.pth (Frozen)",
+        "inference_device": "mps",
+        "execution_timestamp": "2026-09-13T17:46:52.826990+00:00",
+        "execution_runtime_seconds": 3.659
+    },
+    "roi_metadata": {
+        "nominal_specifications": {
+            "patch_dimensions_pixels": [
+                256,
+                256
+            ],
+            "nominal_gsd_meters": 10.0,
+            "nominal_extent_km": [
+                2.56,
+                2.56
+            ],
+            "nominal_area_m2": 6553600.0,
+            "nominal_area_hectares": 655.36,
+            "nominal_area_km2": 6.5536
+        },
+        "actual_geographic_footprint": {
+            "actual_width_meters": 2519.98,
+            "actual_height_meters": 2779.87,
+            "actual_area_m2": 7005236.68,
+            "actual_area_hectares": 700.5237,
+            "actual_area_km2": 7.0052,
+            "effective_gsd_meters_per_pixel": [
+                9.844,
+                10.859
+            ],
+            "calculation_method": "Haversine-based geographic footprint estimate"
+        },
+        "roi_name": "Dubai South Infrastructure Corridor",
+        "bounding_box_wgs84": [
+            55.15,
+            24.96,
+            55.175,
+            24.985
+        ],
+        "geojson_geometry": {
+            "type": "Feature",
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [
+                            55.15,
+                            24.96
+                        ],
+                        [
+                            55.175,
+                            24.96
+                        ],
+                        [
+                            55.175,
+                            24.985
+                        ],
+                        [
+                            55.15,
+                            24.985
+                        ],
+                        [
+                            55.15,
+                            24.96
+                        ]
+                    ]
+                ]
+            },
+            "properties": {
+                "bbox_wgs84": [
+                    55.15,
+                    24.96,
+                    55.175,
+                    24.985
+                ],
+                "center_lat": 24.9725,
+                "center_lon": 55.1625,
+                "roi_name": "Dubai South Infrastructure Corridor"
+            }
+        }
+    },
+    "observations": {
+        "before": {
+            "scene_id": "S2B_MSIL2A_20210806T064629_R020_T40RCN_20210806T165707",
+            "acquisition_datetime": "2021-08-06T06:46:29.024000Z",
+            "acquisition_date": "2021-08-06",
+            "cloud_cover_percentage": 0.66,
+            "platform": "Sentinel-2B",
+            "constellation": "Sentinel 2",
+            "sun_elevation_degrees": 69.41,
+            "cloud_relaxed_applied": false,
+            "applied_cloud_threshold": 5.0,
+            "stac_item_href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a",
+            "temporal_role": "Image A (Before)",
+            "engineering_constraints": {
+                "search_tolerance_days": 30,
+                "min_baseline_days": 15,
+                "actual_delta_days": 1085
+            }
+        },
+        "after": {
+            "scene_id": "S2A_MSIL2A_20240726T064631_R020_T40RCN_20240726T115558",
+            "acquisition_datetime": "2024-07-26T06:46:31.024000Z",
+            "acquisition_date": "2024-07-26",
+            "cloud_cover_percentage": 0.71,
+            "platform": "Sentinel-2A",
+            "constellation": "Sentinel 2",
+            "sun_elevation_degrees": 70.34,
+            "cloud_relaxed_applied": false,
+            "applied_cloud_threshold": 5.0,
+            "stac_item_href": "https://planetarycomputer.microsoft.com/api/stac/v1/collections/sentinel-2-l2a",
+            "temporal_role": "Image B (After)",
+            "engineering_constraints": {
+                "search_tolerance_days": 30,
+                "min_baseline_days": 15,
+                "actual_delta_days": 1085
+            }
+        },
+        "temporal_interval": {
+            "delta_days": 1085,
+            "delta_years": 2.971,
+            "engineering_constraints": {
+                "search_tolerance_days": 30,
+                "min_baseline_days": 15,
+                "constraint_note": "Search tolerance (+/-30 days) and minimum baseline (>=15 days) are TerraVision project-defined engineering design constraints."
+            }
+        }
+    },
+    "change_metrics": {
+        "total_pixels": 65536,
+        "changed_pixels": 5518,
+        "unchanged_pixels": 60018,
+        "change_percentage": 8.42,
+        "unchanged_percentage": 91.58,
+        "change_intensity": "Moderate",
+        "nominal_spatial_metrics": {
+            "nominal_gsd_meters_per_pixel": 10.0,
+            "nominal_changed_area_m2": 551800.0,
+            "nominal_changed_area_hectares": 55.18,
+            "annualized_rate_pct_per_year": 2.83,
+            "annualized_rate_ha_per_year": 18.5756
+        },
+        "actual_geographic_metrics": {
+            "actual_changed_area_m2": 589826.9,
+            "actual_changed_area_hectares": 58.9827,
+            "annualized_rate_ha_per_year": 19.8557,
+            "geodesic_basis": "Haversine-based geographic footprint estimate"
+        }
+    },
+    "temporal_capability_gate": {
+        "mode": "Mode A: Bi-Temporal Observation Pair (N=2 observations, 1 interval)",
+        "supported_analyses": [
+            "bi_temporal_change_detection",
+            "change_quantification",
+            "pairwise_annualized_change_rate"
+        ],
+        "gated_unsupported_analyses": [
+            "historical_trend_regression",
+            "future_prediction",
+            "risk_intelligence"
+        ],
+        "gate_rationale": "Bi-temporal analysis provides exactly two observations (N=2, 1 interval). OLS trend prediction and analytical Student's t intervals require multi-temporal observations (df = N - 2 >= 1). With N=2, df=0, rendering Phase 6-8 trend, forecasting, and risk synthesis mathematically invalid. TerraVision enforces this capability gate and does not fabricate historical observations."
+    },
+    "scientific_disclaimers": {
+        "threshold_and_noise_disclaimer": "The 0.5 probability threshold produced the reported change mask; interpretation remains subject to model limitations and requires independent validation.",
+        "change_detection_limitation": "Phase 9 outputs are model-detected historical change estimates from the Siam-UNet prototype applied to satellite imagery and are not independently ground-truth validated for these STAC observations.",
+        "verified_conversion_disclaimer": "Model-detected change indicates optical surface reflectance discrepancies and does NOT prove ground-truth legal land conversion, zoning status, or confirmed real-world construction.",
+        "spatial_area_disclaimer": "Pixel calculations are authoritative. Physical area measurements are spatial approximations presented as both nominal 10m estimates and geodesic footprint estimates.",
+        "global_accuracy_disclaimer": "TerraVision does not claim global model accuracy. Benchmark locations are integration test environments across varied biomes, not validated global accuracy sites.",
+        "sensor_and_radiometric_note": "Imagery retrieved from Microsoft Planetary Computer represents 8-bit visual true-color composites (B04, B03, B02 BOA). Contrast stretch and atmospheric corrections can influence model sensitivity."
+    }
+}
