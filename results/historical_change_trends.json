@@ -1,0 +1,200 @@
+{
+    "pipeline_metadata": {
+        "phase": "Phase 6 - Historical Change Trends",
+        "project": "TerraVision",
+        "sensor": "Sentinel-2 MSI",
+        "processing_level": "Level-2A (BOA Surface Reflectance)",
+        "stac_provider": "Microsoft Planetary Computer",
+        "model_architecture": "Siam-UNet (Phase 4 Pre-Trained Checkpoint)",
+        "model_limitation": "Phase 6 outputs are model-detected historical change estimates and are not independently ground-truth validated for these STAC observations.",
+        "execution_timestamp": "2026-09-12T23:11:10.940971"
+    },
+    "roi_metadata": {
+        "region_name": "Las Vegas / Henderson Urban Expansion Zone",
+        "bounding_box_wgs84": [
+            -115.12,
+            36.0,
+            -115.09,
+            36.03
+        ],
+        "patch_dimensions_pixels": [
+            256,
+            256
+        ],
+        "spatial_resolution_meters_per_pixel": 10.0,
+        "total_patch_area_m2": 6553600.0,
+        "total_patch_area_hectares": 655.36,
+        "total_patch_area_km2": 6.5536
+    },
+    "temporal_observations": [
+        {
+            "temporal_index": 0,
+            "target_year": 2020,
+            "acquisition_datetime": "2020-08-08T18:19:19.024000Z",
+            "acquisition_date": "2020-08-08",
+            "scene_id": "S2B_MSIL2A_20200808T181919_R127_T11SPV_20200815T130431",
+            "cloud_cover_percentage": 0.47,
+            "platform": "Sentinel-2B",
+            "constellation": "Sentinel 2"
+        },
+        {
+            "temporal_index": 1,
+            "target_year": 2021,
+            "acquisition_datetime": "2021-08-08T18:19:21.024000Z",
+            "acquisition_date": "2021-08-08",
+            "scene_id": "S2A_MSIL2A_20210808T181921_R127_T11SPV_20210809T061648",
+            "cloud_cover_percentage": 1.03,
+            "platform": "Sentinel-2A",
+            "constellation": "Sentinel 2"
+        },
+        {
+            "temporal_index": 2,
+            "target_year": 2022,
+            "acquisition_datetime": "2022-07-19T18:19:19.024000Z",
+            "acquisition_date": "2022-07-19",
+            "scene_id": "S2B_MSIL2A_20220719T181919_R127_T11SPV_20240717T230328",
+            "cloud_cover_percentage": 1.78,
+            "platform": "Sentinel-2B",
+            "constellation": "Sentinel 2"
+        },
+        {
+            "temporal_index": 3,
+            "target_year": 2023,
+            "acquisition_datetime": "2023-08-08T18:19:21.024000Z",
+            "acquisition_date": "2023-08-08",
+            "scene_id": "S2A_MSIL2A_20230808T181921_R127_T11SPV_20241023T010241",
+            "cloud_cover_percentage": 0.03,
+            "platform": "Sentinel-2A",
+            "constellation": "Sentinel 2"
+        },
+        {
+            "temporal_index": 4,
+            "target_year": 2024,
+            "acquisition_datetime": "2024-07-03T18:19:21.024000Z",
+            "acquisition_date": "2024-07-03",
+            "scene_id": "S2A_MSIL2A_20240703T181921_R127_T11SPV_20240705T202412",
+            "cloud_cover_percentage": 0.03,
+            "platform": "Sentinel-2A",
+            "constellation": "Sentinel 2"
+        }
+    ],
+    "consecutive_period_changes": [
+        {
+            "period_index": 1,
+            "period_name": "P1: 2020-08-08 -> 2021-08-08",
+            "start_date": "2020-08-08",
+            "end_date": "2021-08-08",
+            "start_observation_index": 0,
+            "end_observation_index": 1,
+            "delta_days": 365,
+            "delta_years": 0.999,
+            "total_pixels": 65536,
+            "changed_pixels": 2092,
+            "unchanged_pixels": 63444,
+            "change_percentage": 3.19,
+            "unchanged_percentage": 96.81,
+            "gsd_meters_per_pixel": 10.0,
+            "changed_area_m2": 209200.0,
+            "changed_area_hectares": 20.92,
+            "annualized_change_rate_pct_per_year": 3.19,
+            "annualized_change_rate_ha_per_year": 20.9343,
+            "change_intensity": "Moderate"
+        },
+        {
+            "period_index": 2,
+            "period_name": "P2: 2021-08-08 -> 2022-07-19",
+            "start_date": "2021-08-08",
+            "end_date": "2022-07-19",
+            "start_observation_index": 1,
+            "end_observation_index": 2,
+            "delta_days": 345,
+            "delta_years": 0.945,
+            "total_pixels": 65536,
+            "changed_pixels": 315,
+            "unchanged_pixels": 65221,
+            "change_percentage": 0.48,
+            "unchanged_percentage": 99.52,
+            "gsd_meters_per_pixel": 10.0,
+            "changed_area_m2": 31500.0,
+            "changed_area_hectares": 3.15,
+            "annualized_change_rate_pct_per_year": 0.51,
+            "annualized_change_rate_ha_per_year": 3.3349,
+            "change_intensity": "Low"
+        },
+        {
+            "period_index": 3,
+            "period_name": "P3: 2022-07-19 -> 2023-08-08",
+            "start_date": "2022-07-19",
+            "end_date": "2023-08-08",
+            "start_observation_index": 2,
+            "end_observation_index": 3,
+            "delta_days": 385,
+            "delta_years": 1.054,
+            "total_pixels": 65536,
+            "changed_pixels": 557,
+            "unchanged_pixels": 64979,
+            "change_percentage": 0.85,
+            "unchanged_percentage": 99.15,
+            "gsd_meters_per_pixel": 10.0,
+            "changed_area_m2": 55700.0,
+            "changed_area_hectares": 5.57,
+            "annualized_change_rate_pct_per_year": 0.81,
+            "annualized_change_rate_ha_per_year": 5.2843,
+            "change_intensity": "Low"
+        },
+        {
+            "period_index": 4,
+            "period_name": "P4: 2023-08-08 -> 2024-07-03",
+            "start_date": "2023-08-08",
+            "end_date": "2024-07-03",
+            "start_observation_index": 3,
+            "end_observation_index": 4,
+            "delta_days": 330,
+            "delta_years": 0.903,
+            "total_pixels": 65536,
+            "changed_pixels": 398,
+            "unchanged_pixels": 65138,
+            "change_percentage": 0.61,
+            "unchanged_percentage": 99.39,
+            "gsd_meters_per_pixel": 10.0,
+            "changed_area_m2": 39800.0,
+            "changed_area_hectares": 3.98,
+            "annualized_change_rate_pct_per_year": 0.67,
+            "annualized_change_rate_ha_per_year": 4.4051,
+            "change_intensity": "Low"
+        }
+    ],
+    "trend_summary": {
+        "overall_trend_direction": "Decreasing",
+        "trend_slope_pct_per_year2": -0.7336,
+        "trend_slope_ha_per_year2": -4.8134,
+        "mean_annual_change_rate_pct": 1.29,
+        "mean_annual_change_rate_ha": 8.4896,
+        "cumulative_detected_change_hectares": 33.62,
+        "cumulative_detected_change_percentage": 5.13,
+        "cumulative_trajectory_hectares": [
+            20.92,
+            24.07,
+            29.64,
+            33.62
+        ],
+        "cumulative_trajectory_percentage": [
+            3.19,
+            3.67,
+            4.52,
+            5.13
+        ],
+        "cumulative_metric_note": "Cumulative change is strictly cumulative detected change across periods, NOT unique physical land transformed (as individual pixels may transition repeatedly).",
+        "model_limitation": "Phase 6 outputs are model-detected historical change estimates and are not independently ground-truth validated for these STAC observations.",
+        "classification_rule": "Increasing: slope > +0.5 %/yr\u00b2, Decreasing: slope < -0.5 %/yr\u00b2, Stable: |slope| <= 0.5 %/yr\u00b2",
+        "phase7_ready": true,
+        "phase7_target_features": [
+            "period_index",
+            "delta_years",
+            "change_percentage",
+            "changed_area_hectares",
+            "annualized_change_rate_pct_per_year",
+            "cumulative_detected_change_hectares"
+        ]
+    }
+}
