@@ -1,0 +1,229 @@
+{
+    "metadata": {
+        "pipeline": "TerraVision Phase 7 - Future Prediction",
+        "project": "TerraVision",
+        "input_artifact": "results/historical_change_trends.json",
+        "execution_timestamp": "2026-09-13T08:35:52.075807+00:00",
+        "roi_metadata": {
+            "region_name": "Las Vegas / Henderson Urban Expansion Zone",
+            "bounding_box_wgs84": [
+                -115.12,
+                36.0,
+                -115.09,
+                36.03
+            ],
+            "patch_dimensions_pixels": [
+                256,
+                256
+            ],
+            "spatial_resolution_meters_per_pixel": 10.0,
+            "total_patch_area_m2": 6553600.0,
+            "total_patch_area_hectares": 655.36,
+            "total_patch_area_km2": 6.5536
+        },
+        "prediction_type": "Forecast of model-detected change",
+        "ground_truth_validated": false,
+        "status": "Verified"
+    },
+    "historical_series": {
+        "number_of_observations": 4,
+        "observation_midpoint_years": [
+            2021.1013,
+            2022.0739,
+            2023.0739,
+            2024.0548
+        ],
+        "period_names": [
+            "P1: 2020-08-08 -> 2021-08-08",
+            "P2: 2021-08-08 -> 2022-07-19",
+            "P3: 2022-07-19 -> 2023-08-08",
+            "P4: 2023-08-08 -> 2024-07-03"
+        ],
+        "annualized_rates_pct_per_year": [
+            3.19,
+            0.51,
+            0.81,
+            0.67
+        ],
+        "annualized_rates_ha_per_year": [
+            20.9343,
+            3.3349,
+            5.2843,
+            4.4051
+        ],
+        "historical_mean_rate_pct_per_year": 1.295,
+        "historical_mean_year": 2022.576,
+        "baseline_cumulative_detected_change_ha": 33.62,
+        "baseline_cumulative_detected_change_pct": 5.13
+    },
+    "model": {
+        "model_family": "Linear Regression / Statistical Trend Extrapolation",
+        "specification": "First-order Ordinary Least Squares (OLS) with physical non-negativity constraint",
+        "equation": "predicted_rate(t) = max(0.0, y_mean + beta1 * (t - t_mean))",
+        "beta1_trend_slope_pct_per_year2": -0.7336,
+        "beta0_intercept_pct": 1484.9592,
+        "residual_standard_error_se": 1.0529,
+        "degrees_of_freedom": 2,
+        "r_squared": 0.5413,
+        "method_justification": "With N=4 historical intervals (df=2), complex ML or polynomial architectures suffer from extreme overfitting. Bounded OLS provides statistical parsimony, direct continuity with Phase 6 slope metrics, and analytical Student's t uncertainty bounds."
+    },
+    "forecasts": [
+        {
+            "forecast_year": 2025,
+            "horizon_years_ahead": 1,
+            "target_interval": "2024 -> 2025",
+            "unconstrained_predicted_rate_pct": -0.4831,
+            "predicted_annualized_rate_pct": 0.0,
+            "predicted_annualized_rate_ha_per_year": 0.0,
+            "prediction_standard_error_s_pred": 1.6509,
+            "prediction_interval_90_pct": {
+                "lower_bound_pct": 0.0,
+                "upper_bound_pct": 4.3376,
+                "lower_bound_ha_per_year": 0.0,
+                "upper_bound_ha_per_year": 28.4268,
+                "confidence_level": 0.9,
+                "critical_t": 2.92
+            },
+            "prediction_interval_95_pct": {
+                "lower_bound_pct": 0.0,
+                "upper_bound_pct": 6.6203,
+                "lower_bound_ha_per_year": 0.0,
+                "upper_bound_ha_per_year": 43.3868,
+                "confidence_level": 0.95,
+                "critical_t": 4.3027
+            },
+            "projected_cumulative_detected_change_ha": 33.62,
+            "projected_cumulative_detected_change_pct": 5.13
+        },
+        {
+            "forecast_year": 2026,
+            "horizon_years_ahead": 2,
+            "target_interval": "2025 -> 2026",
+            "unconstrained_predicted_rate_pct": -1.2167,
+            "predicted_annualized_rate_pct": 0.0,
+            "predicted_annualized_rate_ha_per_year": 0.0,
+            "prediction_standard_error_s_pred": 2.0147,
+            "prediction_interval_90_pct": {
+                "lower_bound_pct": 0.0,
+                "upper_bound_pct": 4.6663,
+                "lower_bound_ha_per_year": 0.0,
+                "upper_bound_ha_per_year": 30.5811,
+                "confidence_level": 0.9,
+                "critical_t": 2.92
+            },
+            "prediction_interval_95_pct": {
+                "lower_bound_pct": 0.0,
+                "upper_bound_pct": 7.452,
+                "lower_bound_ha_per_year": 0.0,
+                "upper_bound_ha_per_year": 48.8375,
+                "confidence_level": 0.95,
+                "critical_t": 4.3027
+            },
+            "projected_cumulative_detected_change_ha": 33.62,
+            "projected_cumulative_detected_change_pct": 5.13
+        },
+        {
+            "forecast_year": 2027,
+            "horizon_years_ahead": 3,
+            "target_interval": "2026 -> 2027",
+            "unconstrained_predicted_rate_pct": -1.9503,
+            "predicted_annualized_rate_pct": 0.0,
+            "predicted_annualized_rate_ha_per_year": 0.0,
+            "prediction_standard_error_s_pred": 2.4184,
+            "prediction_interval_90_pct": {
+                "lower_bound_pct": 0.0,
+                "upper_bound_pct": 5.1115,
+                "lower_bound_ha_per_year": 0.0,
+                "upper_bound_ha_per_year": 33.4988,
+                "confidence_level": 0.9,
+                "critical_t": 2.92
+            },
+            "prediction_interval_95_pct": {
+                "lower_bound_pct": 0.0,
+                "upper_bound_pct": 8.4554,
+                "lower_bound_ha_per_year": 0.0,
+                "upper_bound_ha_per_year": 55.4133,
+                "confidence_level": 0.95,
+                "critical_t": 4.3027
+            },
+            "projected_cumulative_detected_change_ha": 33.62,
+            "projected_cumulative_detected_change_pct": 5.13
+        }
+    ],
+    "cumulative_projection": {
+        "historical_baseline_cumulative_ha": 33.62,
+        "historical_baseline_cumulative_pct": 5.13,
+        "projection_horizon_years": [
+            2025,
+            2026,
+            2027
+        ],
+        "projected_cumulative_ha": [
+            33.62,
+            33.62,
+            33.62
+        ],
+        "projected_cumulative_pct": [
+            5.13,
+            5.13,
+            5.13
+        ],
+        "projected_cumulative_upper_90_ha": [
+            62.0468,
+            92.6279,
+            126.1267
+        ],
+        "projected_cumulative_upper_95_ha": [
+            77.0068,
+            125.8443,
+            181.2576
+        ],
+        "monotonic_check_passed": true,
+        "metric_clarification": "Cumulative change is strictly cumulative detected change across periods, NOT unique physical land transformed (as individual pixels may transition repeatedly)."
+    },
+    "uncertainty": {
+        "method": "Analytical OLS Prediction Standard Error with Student's t-distribution",
+        "degrees_of_freedom": 2,
+        "critical_t_90_pct": 2.92,
+        "critical_t_95_pct": 4.3027,
+        "standard_error_formula": "s_pred(t0) = s_e * sqrt(1 + 1/N + (t0 - t_mean)^2 / sum((t_i - t_mean)^2))",
+        "horizon_widening_verified": true,
+        "horizon_caveat": "Year 2027 is documented as a deliberately conservative maximum forecast horizon because only four historical observations exist and prediction uncertainty becomes increasingly large beyond the observed period."
+    },
+    "limitations": {
+        "model_detection_basis": "Phase 7 outputs are forecasts of model-detected change derived from Phase 4 Siam-UNet inferences on Sentinel-2 STAC observations and are not independently ground-truth validated.",
+        "non_guarantee": "Forecasts represent statistical trajectory expectations under continuity assumptions and are not guaranteed real-world land conversion or development activity.",
+        "cumulative_metric_distinction": "Cumulative detected change reflects strictly cumulative model detections across temporal intervals, NOT unique physical land transformed (as individual pixels may transition repeatedly).",
+        "exogenous_invariance": "The statistical model assumes stationary trend dynamics and does not account for sudden macroeconomic shifts, policy changes, or regional land-use zoning restrictions."
+    },
+    "phase8_interface": {
+        "ready_for_phase8_risk_intelligence": true,
+        "primary_forecast_horizon": 2025,
+        "forecast_summary_2025": {
+            "year": 2025,
+            "point_forecast_rate_pct": 0.0,
+            "point_forecast_ha_per_year": 0.0,
+            "upper_bound_90_ha_per_year": 28.4268,
+            "upper_bound_95_ha_per_year": 43.3868,
+            "projected_cumulative_ha": 33.62
+        },
+        "forecast_summary_2026": {
+            "year": 2026,
+            "point_forecast_rate_pct": 0.0,
+            "point_forecast_ha_per_year": 0.0,
+            "upper_bound_90_ha_per_year": 30.5811,
+            "upper_bound_95_ha_per_year": 48.8375,
+            "projected_cumulative_ha": 33.62
+        },
+        "forecast_summary_2027": {
+            "year": 2027,
+            "point_forecast_rate_pct": 0.0,
+            "point_forecast_ha_per_year": 0.0,
+            "upper_bound_90_ha_per_year": 33.4988,
+            "upper_bound_95_ha_per_year": 55.4133,
+            "projected_cumulative_ha": 33.62
+        },
+        "historical_trend_direction": "Decreasing",
+        "risk_evaluation_guidance": "Phase 8 Risk Intelligence should evaluate risk using both point forecasts (baseline expectation) and the 95% upper prediction bound (precautionary stress-test / worst-case scenario)."
+    }
+}
