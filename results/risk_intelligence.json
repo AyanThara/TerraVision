@@ -1,0 +1,103 @@
+{
+    "metadata": {
+        "pipeline": "TerraVision Phase 8 - Risk Intelligence",
+        "project": "TerraVision",
+        "execution_timestamp": "2026-09-13T10:13:09.045806+00:00",
+        "input_artifacts": [
+            "results/change_quantification.json",
+            "results/historical_change_trends.json",
+            "results/future_prediction.json"
+        ],
+        "indicator_type": "Analytical Geospatial Land-Change Risk Indicator",
+        "ground_truth_validated": false,
+        "status": "Verified"
+    },
+    "risk_assessment": {
+        "overall_risk_score": 34.32,
+        "risk_level": "MODERATE",
+        "risk_score_range": "0 - 100",
+        "evidence_confidence_score": 37.74,
+        "evidence_confidence_level": "LOW CONFIDENCE",
+        "primary_risk_driver": "Precautionary future stress-test uncertainty buffer (95% upper bound of 6.62 %/yr)",
+        "evaluation_note": "Analytical risk indicator combining change pressure, historical momentum, and precautionary forward bounds."
+    },
+    "sub_scores": {
+        "change_pressure_score": {
+            "score": 36.82,
+            "weight": 0.4,
+            "weighted_contribution": 14.73,
+            "formula": "S_pressure = 0.50 * P_cum + 0.50 * P_recent",
+            "interpretation": "Moderate cumulative transformation (5.13% ROI), mitigated by subdued recent velocity (0.67 %/yr)."
+        },
+        "trend_momentum_score": {
+            "score": 25.55,
+            "weight": 0.3,
+            "weighted_contribution": 7.67,
+            "formula": "S_trend = clamp(50 + (beta1 / 1.5) * 50, 0, 100)",
+            "interpretation": "Decelerating momentum (slope -0.7336 %/yr\u00b2); transition velocity has sharply declined from 2021 peak."
+        },
+        "future_outlook_score": {
+            "score": 39.72,
+            "weight": 0.3,
+            "weighted_contribution": 11.92,
+            "formula": "S_forecast = 0.40 * F_point + 0.60 * F_stress",
+            "interpretation": "Point forecast is 0.00 %/yr, but 95% upper prediction bound reflects potential 43.39 ha/yr expansion."
+        }
+    },
+    "calibration_benchmarks": {
+        "benchmark_classification": "TerraVision heuristic normalization benchmarks",
+        "benchmark_status": "Project-defined calibration constants for prototype analytical scaling; not universally validated geospatial thresholds",
+        "cumulative_benchmark_pct": 10.0,
+        "velocity_benchmark_pct_yr": 3.0,
+        "stress_benchmark_pct_yr": 10.0
+    },
+    "risk_factors": [
+        {
+            "factor": "Cumulative Detected Transformation",
+            "metric": "33.62 ha (5.13% of ROI)",
+            "impact": "MODERATE",
+            "direction": "Cumulative expansion"
+        },
+        {
+            "factor": "Historical Trend Trajectory",
+            "metric": "-0.7336 %/year\u00b2",
+            "impact": "MITIGATING",
+            "direction": "Decelerating change pace"
+        },
+        {
+            "factor": "Precautionary Exposure (Upper 95% Bound)",
+            "metric": "43.39 ha/year (6.62 %/yr)",
+            "impact": "ELEVATING",
+            "direction": "High variance due to small sample size"
+        }
+    ],
+    "explanations": {
+        "executive_summary": "The analyzed region exhibits a MODERATE analytical risk indicator (34.32/100) with LOW CONFIDENCE (37.74/100). Recent physical change velocity has decelerated, yielding a bounded point forecast of 0.0 %/year. However, the wide 95% prediction interval (up to 43.39 ha/year) driven by small sample size (df=2) necessitates moderate precautionary monitoring.",
+        "scientific_distinction_note": "Risk scores quantify model-detected surface transformation pressure and statistical forecast dispersion; they do not guarantee real-world development or construction activity. Evidence confidence reflects analytical input adequacy, NOT formal statistical coverage.",
+        "evidence_confidence_distinction": "Evidence Confidence Score is an engineering/analytical data-adequacy index on [0, 100] and must never be conflated with formal statistical confidence intervals, coverage probabilities, or p-values."
+    },
+    "phase9_interface": {
+        "ready_for_global_scaling": true,
+        "regional_risk_classification": "MODERATE_CAUTION",
+        "normalization_benchmarks_exported": {
+            "cum_benchmark_pct": 10.0,
+            "velocity_benchmark_pct_yr": 3.0,
+            "stress_benchmark_pct_yr": 10.0
+        }
+    },
+    "phase10_interface": {
+        "ready_for_web_platform": true,
+        "ui_display_badge": {
+            "risk_level": "MODERATE",
+            "color_hex": "#f59e0b",
+            "evidence_confidence_badge": "LOW CONFIDENCE",
+            "confidence_color_hex": "#ef4444"
+        },
+        "card_metrics": {
+            "overall_risk": "34.3 / 100",
+            "change_pressure": "36.8 / 100",
+            "trend_momentum": "25.6 / 100",
+            "future_outlook": "39.7 / 100"
+        }
+    }
+}

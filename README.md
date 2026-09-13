@@ -40,8 +40,8 @@ Interactive Web Platform
 | Phase 4  | Bi-Temporal Change Detection  | ✅ Complete |
 | Phase 5  | Change Quantification         | ✅ Complete |
 | Phase 6  | Historical Trends             | ✅ Complete |
-| Phase 7  | Future Prediction             | ⏳ Planned  |
-| Phase 8  | Risk Intelligence             | ⏳ Planned  |
+| Phase 7  | Future Prediction             | ✅ Complete |
+| Phase 8  | Risk Intelligence             | ✅ Complete |
 | Phase 9  | Global Scaling                | ⏳ Planned  |
 | Phase 10 | Web Platform                  | ⏳ Planned  |
 
@@ -159,6 +159,83 @@ Pixel-level measurements are treated as the authoritative result, while physical
 
 ---
 
+## 📈 Phase 6 — Historical Change Trends
+
+TerraVision connects dynamically to the **Microsoft Planetary Computer STAC API** to retrieve genuine multi-temporal **Sentinel-2 MSI Level-2A** (surface reflectance) observations over a fixed geographic region (Las Vegas / Henderson Urban Expansion Zone).
+
+Pairwise change detection was performed across five consecutive observations spanning **2020–2024** (four consecutive multi-temporal intervals) using the Phase 4 Siam-UNet model checkpoint.
+
+### Summary Metrics
+
+* Sensor: **Sentinel-2 MSI (Level-2A BOA Surface Reflectance)**
+* Historical Observations: **5 genuine STAC scenes (2020–2024)**
+* Consecutive Periods: **4 intervals (P1: 2020–2021, P2: 2021–2022, P3: 2022–2023, P4: 2023–2024)**
+* Mean Annual Detected Change Rate: **1.29 %/year**
+* Mean Annual Detected Change Area: **8.49 ha/year**
+* Overall Trend: **Decreasing** (OLS slope = **-0.7336 %/year²**)
+* Cumulative Detected Change: **33.62 hectares** (5.13% of ROI)
+
+*Important Scientific Limitation:* Phase 6 outputs are model-detected historical change estimates from the Siam-UNet prototype applied to satellite imagery and are not independently ground-truth validated for every historical observation. Cumulative change is strictly cumulative detected change across periods, not unique physical land transformed.
+
+---
+
+## 🔮 Phase 7 — Future Prediction
+
+Phase 7 evaluates the historical time series to project future model-detected change using a lightweight, mathematically defensible statistical approach.
+
+Given the small sample size ($N = 4$ observations, leaving $df = N - 2 = 2$ degrees of freedom), complex machine-learning models or high-order polynomials would overfit. A first-order Ordinary Least Squares (OLS) linear trend extrapolation with analytical Student's $t$ prediction intervals and a physical non-negativity constraint was implemented.
+
+### Forecast Model & Projections
+
+* Method: **First-order OLS trend extrapolation with physical non-negativity constraint**
+* Degrees of Freedom: **$df = 2$ ($N = 4$ historical observations)**
+* Historical OLS Slope: **-0.7336 %/year²**
+* Forecast Horizons: **2025, 2026, 2027**
+
+| Horizon | Point Forecast (Bounded) | 90% Prediction Interval | 95% Prediction Interval | Projected Cumulative Change |
+| :--- | :--- | :--- | :--- | :--- |
+| **2025 ($T+1$)** | **0.00 %/year** (0.00 ha/yr) | 0.00–4.34 %/year | **0.00–6.62 %/year** | 33.62 ha |
+| **2026 ($T+2$)** | **0.00 %/year** (0.00 ha/yr) | 0.00–4.67 %/year | **0.00–7.45 %/year** | 33.62 ha |
+| **2027 ($T+3$)** | **0.00 %/year** (0.00 ha/yr) | 0.00–5.11 %/year | **0.00–8.46 %/year** | 33.62 ha |
+
+### Key Methodological & Statistical Notes
+
+* **Point Forecast at Zero:** The point forecast is 0.00 %/year because extrapolating the historical decreasing trend ($-0.7336\ \%/\text{year}^2$) yields negative values, which are physically bounded at zero since land change rates cannot be negative.
+* **Wide Prediction Intervals:** Prediction intervals are wide ($0\text{--}6.62\%$ for 2025, $0\text{--}8.46\%$ for 2027) because they are calculated using Student's $t$ critical values with only 2 degrees of freedom ($t_{2, 0.95} \approx 4.303$), properly reflecting small-sample epistemic uncertainty rather than false precision.
+* **Forecast of Model-Detected Change:** Phase 7 forecasts model-detected change estimates, NOT guaranteed real-world land conversion or development.
+* **Cumulative Metric Distinction:** Projected cumulative detected change measures cumulative detected change events across temporal intervals, NOT unique physical land transformed.
+
+---
+
+## ⚠️ Phase 8 — Risk Intelligence
+
+Phase 8 synthesizes the completed outputs from Phase 5 (Change Quantification), Phase 6 (Historical Trends), and Phase 7 (Future Prediction) into a structured, transparent **Analytical Risk Indicator**.
+
+The engine computes three orthogonal sub-scores and pairs them with an independent **Evidence Confidence Score** reflecting input data quality and degrees of freedom ($df=2$).
+
+### Risk & Evidence Confidence Assessment
+
+* **Overall Analytical Risk Indicator:** **34.32 / 100**
+* **Risk Level:** **`MODERATE`** ($30.0 \le R < 60.0$)
+* **Evidence Confidence Score:** **37.74 / 100**
+* **Evidence Confidence Level:** **`LOW CONFIDENCE`** ($< 40.0$, small sample penalty)
+
+### Sub-Score Multi-Factor Breakdown
+
+| Dimension | Sub-Score | Weight | Key Indicator / Inputs | Interpretation |
+| :--- | :--- | :--- | :--- | :--- |
+| **Change Pressure ($S_{\text{pressure}}$)** | **36.82 / 100** | 40% | Cumulative: 5.13% ROI; Recent: 0.67 %/yr | Moderate historical transformation volume, mitigated by subdued recent velocity. |
+| **Trend Momentum ($S_{\text{trend}}$)** | **25.55 / 100** | 30% | OLS Slope: $-0.7336\ \%/\text{year}^2$ | Decelerating momentum; transition pace has sharply declined from 2021 peak. |
+| **Future Outlook ($S_{\text{forecast}}$)** | **39.72 / 100** | 30% | Point: 0.0 %/yr; 95% Bound: 43.39 ha/yr | Bounded point expectation is zero, but precautionary upper bound indicates tail exposure. |
+
+### Key Methodological & Scientific Notes
+
+* **Analytical Risk Indicator:** The risk score measures model-detected surface transformation pressure and statistical forecast dispersion. It does NOT prove ground-truth legal zoning, entitlement, or guaranteed real-world construction.
+* **Evidence Confidence Score vs. Statistical Intervals:** The Evidence Confidence Score ($37.74 / 100$, `LOW CONFIDENCE`) is an engineering/analytical data-adequacy index. It must NOT be confused with formal statistical confidence intervals, coverage probabilities, or p-values.
+* **Calibration Benchmarks:** The normalization thresholds ($10\%$ cumulative change, $3.0\ \%/\text{yr}$ velocity, $10.0\ \%/\text{yr}$ stress test) are explicitly defined as **TerraVision heuristic normalization benchmarks**—project-defined calibration constants for prototype scaling, not universally validated geospatial thresholds.
+
+---
+
 ## 🧩 Project Structure
 
 ```text
@@ -171,7 +248,10 @@ TerraVision/
 │   ├── inspect_dataset.py
 │   ├── verify_pipeline.py
 │   ├── verify_segmentation_pipeline.py
-│   └── verify_change_pipeline.py
+│   ├── verify_change_pipeline.py
+│   ├── verify_historical_trends.py
+│   ├── verify_future_prediction.py
+│   └── verify_risk_intelligence.py
 │
 ├── src/
 │   ├── dataset.py
@@ -189,7 +269,10 @@ TerraVision/
 │   ├── train_change_detection.py
 │   ├── evaluate_change_detection.py
 │   │
-│   └── quantify_change.py
+│   ├── quantify_change.py
+│   ├── historical_trends.py
+│   ├── future_prediction.py
+│   └── risk_intelligence.py
 │
 ├── models/
 │   └── local model checkpoints
@@ -198,7 +281,13 @@ TerraVision/
 │   ├── classification results
 │   ├── segmentation results
 │   ├── change-detection results
-│   └── quantification results
+│   ├── quantification results
+│   ├── historical_change_trends.json
+│   ├── historical_change_trends.png
+│   ├── future_prediction.json
+│   ├── future_prediction.png
+│   ├── risk_intelligence.json
+│   └── risk_intelligence.png
 │
 ├── docs/
 │   └── project documentation
@@ -242,9 +331,8 @@ Used for genuine bi-temporal satellite change detection.
 
 Future TerraVision phases will focus on:
 
-* 📈 Historical land-cover change trends
-* 🔮 Future change prediction
-* ⚠️ Geospatial risk intelligence
+* 🌍 Global scaling across diverse biomes (Phase 9)
+* 🌐 Interactive geospatial web platform (Phase 10)
 * 🏙️ Urban expansion monitoring
 * 🌾 Agricultural land monitoring
 * 🌲 Environmental change monitoring
@@ -285,9 +373,9 @@ The frontend has **not yet been implemented**.
 
 ## 🔬 Current Project Status
 
-TerraVision currently has a functioning machine-learning pipeline through **Phase 5: Change Quantification**.
+TerraVision currently has a functioning analytical/ML pipeline through **Phase 8: Risk Intelligence**.
 
-The current results represent **prototype experiments**, not production-grade satellite intelligence. Future work will focus on improving model performance, expanding temporal analysis, adding prediction and risk intelligence, and integrating the pipeline into an interactive geospatial web application.
+The current results represent **prototype experiments**, not production-grade satellite intelligence. Future work will focus on improving model performance, global scaling (Phase 9), and integrating the pipeline into an interactive geospatial web application (Phase 10).
 
 ---
 
