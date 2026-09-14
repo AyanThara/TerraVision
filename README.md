@@ -34,7 +34,7 @@ Interactive Web Platform
 
 | Phase    | Component                     | Status     |
 | -------- | ----------------------------- | ---------- |
-| Phase 1  | Data Pipeline & Preprocessing | ✅ Complete |
+| Phase 1  | Data Pipeline & Preprocessing | ✅ Completed |
 | Phase 2  | Land-Use Classification       | ✅ Complete |
 | Phase 3  | Land-Cover Segmentation       | ✅ Complete |
 | Phase 4  | Bi-Temporal Change Detection  | ✅ Complete |
