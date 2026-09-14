@@ -38,7 +38,7 @@ Interactive Web Platform
 | Phase 2  | Land-Use Classification       | ✅ Completed |
 | Phase 3  | Land-Cover Segmentation       | ✅ Completed |
 | Phase 4  | Bi-Temporal Change Detection  | ✅ Completed |
-| Phase 5  | Change Quantification         | ✅ Complete |
+| Phase 5  | Change Quantification         | ✅ Completed |
 | Phase 6  | Historical Trends             | ✅ Complete |
 | Phase 7  | Future Prediction             | ✅ Complete |
 | Phase 8  | Risk Intelligence             | ✅ Complete |
